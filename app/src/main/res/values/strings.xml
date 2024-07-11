@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">TheVoices</string>
+    <string name="register">Register</string>
+    <string name="usernameLogin">Username</string>
+    <string name="passwordLogin">Password</string>
+    <string name="loginLogin">Login</string>
+    <string name="donthaveaccount">Don\'t have an account ?</string>
+    <string name="forgotpasswordLogin">Forgot password ?</string>
+    <string name="registerRegister">Register</string>
+    <string name="usernameRegister">Username</string>
+    <string name="passwordRegister">Password</string>
+    <string name="emailRegister">Email</string>
+    <string name="haveaccount">Have account ?</string>
 </resources>
