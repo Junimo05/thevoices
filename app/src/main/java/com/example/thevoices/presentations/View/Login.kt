@@ -36,14 +36,16 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.thevoices.R
+import com.example.thevoices.ViewModel.AppViewModel
 import com.example.thevoices.ViewModel.LoginViewModel
 
 @Composable
-fun LoginScreen(navController: NavController? = null){
+fun LoginScreen(navController: NavController? = null, appViewModel: AppViewModel){
     val viewModel = viewModel<LoginViewModel>()
     Login(
         viewModel = viewModel,
-        navController = navController
+        navController = navController,
+        appViewModel = appViewModel
     )
 }
 
@@ -51,6 +53,7 @@ fun LoginScreen(navController: NavController? = null){
 @Composable
 fun Login(
     viewModel: LoginViewModel,
+    appViewModel: AppViewModel? = null,
     navController: NavController? = null,
     modifier: Modifier = Modifier
 ){
@@ -126,6 +129,7 @@ fun Login(
             Spacer(modifier = Modifier.padding(20.dp))
             Button(onClick = {
                 if (viewModel.onLoginClicked()) {
+                    appViewModel?.setLoginState(true)
                     navController?.navigate("home")
                 }
             },
@@ -160,5 +164,6 @@ fun Login(
 @Preview(showBackground = true)
 @Composable
 fun LoginPreview(){
-    LoginScreen()
+    val appViewModel = AppViewModel()
+    LoginScreen(appViewModel = appViewModel)
 }

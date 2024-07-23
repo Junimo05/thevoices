@@ -17,9 +17,10 @@ class LoginViewModel @Inject constructor(
 ) : ViewModel() {
     var username by savedStateHandle.saveable { mutableStateOf("")}
     var password by savedStateHandle.saveable{ mutableStateOf("")}
-
+    var loginStatus by savedStateHandle.saveable { mutableStateOf(false)}
     fun onLoginClicked(): Boolean {
         if(username == "admin" && password == "admin") {
+            loginStatus = true
             Log.i("LoginScreen", "Login successful")
             return true
         }
