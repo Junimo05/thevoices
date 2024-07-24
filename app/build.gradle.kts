@@ -71,6 +71,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //room
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
     //material3
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.compose.foundation:foundation-layout-android:1.6.8@aar")
