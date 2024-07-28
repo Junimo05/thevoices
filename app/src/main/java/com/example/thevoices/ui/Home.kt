@@ -1,7 +1,9 @@
-package com.example.thevoices.presentations.View
+package com.example.thevoices.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,13 +16,18 @@ fun HomeScreen(
     Home()
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Home(
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier.fillMaxSize()
+    Scaffold(
     ) {
-        Text(text = "Home Screen")
+
+        Box(
+            modifier = modifier.fillMaxSize()
+        ) {
+            Text(text = "Home")
+        }
     }
 }

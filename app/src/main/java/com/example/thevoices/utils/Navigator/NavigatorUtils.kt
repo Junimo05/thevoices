@@ -1,25 +1,13 @@
 package com.example.thevoices.utils.Navigator
 
-import kotlinx.serialization.Serializable
-
-sealed class SubGraph {
-    @Serializable
-    data object Auth: SubGraph()
-    @Serializable
-    data object Main: SubGraph()
-
+sealed class AuthScreen(val route: String) {
+    object SplashScreen: AuthScreen("SPLASH_SCREEN")
+    object LoginScreen: AuthScreen("LOGIN_SCREEN")
+    object RegisterScreen: AuthScreen("REGISTER_SCREEN")
+    object ForgetPasswordScreen: AuthScreen("FORGET_PASSWORD_SCREEN")
 }
 
-sealed class Destination() {
-    @Serializable
-    data object SplashScreen: Destination()
-    @Serializable
-    data object LoginScreen: Destination()
-    @Serializable
-    data object RegisterScreen: Destination()
-    @Serializable
-    data object ForgetPasswordScreen: Destination()
-
-    @Serializable
-    data object HomeScreen: Destination()
+sealed class MainScreen(val route: String) {
+    object HomeScreen: MainScreen("HOME_SCREEN")
+    object RecordScreen: MainScreen("RECORD_SCREEN")
 }

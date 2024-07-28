@@ -4,31 +4,30 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.example.thevoices.presentations.View.Home
-import com.example.thevoices.presentations.View.HomeScreen
-import com.example.thevoices.presentations.View.LoginScreen
+import com.example.thevoices.ui.HomeScreen
+import com.example.thevoices.ui.Splash.SplashScreen
 
 fun NavGraphBuilder.authGraph(navController: NavController){
-    navigation<SubGraph.Auth>(startDestination = Destination.SplashScreen){
-        composable<Destination.SplashScreen>{
-            HomeScreen(navController = navController)
+    navigation(route = Graph.AUTHENTICATION, startDestination = AuthScreen.SplashScreen.route){
+        composable(route = AuthScreen.SplashScreen.route){
+            SplashScreen(navController = navController)
         }
-        composable<Destination.LoginScreen> {
+        composable(route = AuthScreen.LoginScreen.route){
 
         }
-        composable<Destination.RegisterScreen> {
+        composable(route = AuthScreen.RegisterScreen.route){
 
         }
-        composable<Destination.ForgetPasswordScreen> {
+        composable(route = AuthScreen.ForgetPasswordScreen.route){
 
         }
     }
 }
 
 fun NavGraphBuilder.mainGraph(navController: NavController){
-    navigation<SubGraph.Main>(startDestination = Destination.HomeScreen){
-        composable<Destination.HomeScreen> {
-
+    navigation(route = Graph.MAIN, startDestination = MainScreen.HomeScreen.route){
+        composable(route = MainScreen.HomeScreen.route){
+            HomeScreen(navController = navController)
         }
     }
 }

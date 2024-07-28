@@ -12,7 +12,6 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    navController: NavController
 ): ViewModel() {
     var username by savedStateHandle.saveable { mutableStateOf("")}
     var password by savedStateHandle.saveable{ mutableStateOf("")}

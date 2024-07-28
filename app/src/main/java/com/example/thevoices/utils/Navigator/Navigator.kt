@@ -10,8 +10,17 @@ import androidx.navigation.compose.rememberNavController
 fun Navigator() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Destination.SplashScreen){
+    NavHost(navController = navController,
+        startDestination = Graph.AUTHENTICATION,
+        route = Graph.ROOT
+    ){
         authGraph(navController) //authentication nav
         mainGraph(navController) //home nav
     }
+}
+
+object Graph {
+    const val ROOT = "root_graph"
+    const val AUTHENTICATION = "auth_graph"
+    const val MAIN = "main_graph"
 }
