@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,7 +79,8 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
 
     //material3
-    implementation("androidx.compose.material3:material3:1.2.1")
+    val material3_version = "1.2.1"
+    implementation("androidx.compose.material3:material3:$material3_version")
     implementation("androidx.compose.foundation:foundation-layout-android:1.6.8@aar")
 
 

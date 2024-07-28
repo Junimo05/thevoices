@@ -10,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -20,26 +21,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
 import com.example.thevoices.R
+import com.example.thevoices.utils.Navigator.AuthScreen
+import com.example.thevoices.utils.Navigator.MainScreen
 
 @Composable
 fun BottomBar(
+    selectedPage: MutableIntState,
     navController: NavController
 ) {
-    //change it to State
-    var selectedItemIndex by rememberSaveable {
-        mutableStateOf(0)
-    }
     val items = listOf(
         BottomBarItem(
-            route = "home",
+            route = MainScreen.HomeScreen.route,
             selectedIcon = R.drawable.home,
             unselectedIcon = R.drawable.home,
             contentDescription = "Home"
         ),
         BottomBarItem(
-            route = "search",
+            route = AuthScreen.SplashScreen.route,
             selectedIcon = R.drawable.search,
             unselectedIcon = R.drawable.search,
             contentDescription = "Search"
@@ -67,16 +68,19 @@ fun BottomBar(
 
     NavigationBar {
         items.forEachIndexed() { index, item ->
+            val isSelected = selectedPage.intValue == index
             NavigationBarItem(
-                selected = selectedItemIndex == index,
+                selected = isSelected,
                 onClick = {
-                    selectedItemIndex = index
-                    navController.navigate(item.route)
+                    selectedPage.intValue = index
+                    navController.navigate(item.route){
+                        popUpTo(navController.graph.findStartDestination().id)
+                    }
                 },
                 icon = {
                     Icon(
                         painter = painterResource(
-                            if (selectedItemIndex == index) item.selectedIcon else item.unselectedIcon
+                            if (selectedPage.intValue == index) item.selectedIcon else item.unselectedIcon
                         ),
                         contentDescription = item.contentDescription,
                         modifier = Modifier.width(24.dp)
@@ -97,5 +101,5 @@ data class BottomBarItem(
 @Preview(showBackground = true)
 @Composable
 fun BottomBarPreview() {
-    BottomBar(navController = rememberNavController())
+//    BottomBar(navController = rememberNavController(), selectedPage = MutableIntState(0)) }
 }

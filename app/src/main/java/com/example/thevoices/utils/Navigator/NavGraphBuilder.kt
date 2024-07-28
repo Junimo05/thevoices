@@ -25,7 +25,7 @@ fun NavGraphBuilder.authGraph(navController: NavController){
 }
 
 fun NavGraphBuilder.mainGraph(navController: NavController){
-    navigation(route = Graph.MAIN, startDestination = MainScreen.HomeScreen.route){
+    navigation(route = Graph.NAV_SCREEN, startDestination = MainScreen.HomeScreen.route){
         composable(route = MainScreen.HomeScreen.route){
             HomeScreen(navController = navController)
         }

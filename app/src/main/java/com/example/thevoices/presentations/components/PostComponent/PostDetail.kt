@@ -1,5 +1,6 @@
 package com.example.thevoices.presentations.components.PostComponent
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,9 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.thevoices.R
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PostDetail() {
-    /*...*/
+    Scaffold {
+
+    }
 }
 
 @Composable
@@ -43,7 +48,7 @@ fun ProfileDetail(
         )
         Spacer(modifier = Modifier.width(4.dp))
         Text(text = "Luca Morrison", fontWeight = FontWeight.Bold)
-        Text(text = "My story of moving to Japan", color = Color.Gray)
+        Text(text = "@lucamorrison", color = Color.Gray)
 
         Row {
             Button(onClick = { /*TODO*/ }) {
@@ -54,6 +59,13 @@ fun ProfileDetail(
             }
         }
     }
+}
+
+@Composable
+fun PostItem(
+
+){
+
 }
 
 @Preview(showBackground = true)

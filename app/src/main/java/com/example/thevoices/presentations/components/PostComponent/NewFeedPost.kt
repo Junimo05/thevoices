@@ -42,7 +42,7 @@ fun ProfileNewFeed(
     {
         ProfileInfo()
         Spacer(modifier = Modifier.width(16.dp))
-        AudioWaveform(duration = "4:12")
+        AudioWaveform(duration = "4:12", isPlaying = true)
         Spacer(modifier = Modifier.height(8.dp))
         InteractionRow()
     }
