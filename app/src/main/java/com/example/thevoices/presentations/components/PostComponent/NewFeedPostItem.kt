@@ -1,9 +1,7 @@
 package com.example.thevoices.presentations.components.PostComponent
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,11 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,9 +22,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.thevoices.R
-
+import com.example.thevoices.presentations.components.InteractionRow
+import com.example.thevoices.utils.Post_Interactions
 @Composable
-fun ProfileNewFeed(
+fun NewFeedPostItem(
 
 ) {
     Column (
@@ -44,7 +38,7 @@ fun ProfileNewFeed(
         Spacer(modifier = Modifier.width(16.dp))
         AudioWaveform(duration = "4:12", isPlaying = true)
         Spacer(modifier = Modifier.height(8.dp))
-        InteractionRow()
+        InteractionRow(interactions = Post_Interactions(/*Todo interaction data*/))
     }
 }
 
@@ -75,5 +69,5 @@ fun ProfileInfo(
 @Preview(showBackground = true)
 @Composable
 fun ProfileNewFeedPreview() {
-    ProfileNewFeed()
+    NewFeedPostItem()
 }

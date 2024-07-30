@@ -1,15 +1,23 @@
 package com.example.thevoices.presentations.components.PostComponent
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,16 +26,47 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.thevoices.R
+import com.example.thevoices.presentations.components.InteractionRow
+import com.example.thevoices.utils.Post_Interactions
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PostDetail() {
-    Scaffold {
-
+    Scaffold(
+        topBar = {
+                 Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                     horizontalArrangement = Arrangement.Center,
+                     modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.Gray)
+                         .padding(bottom = 16.dp, top = 16.dp)
+                 ) {
+                     Text(
+                         text = "Post Detail",
+                         style = TextStyle(
+                             fontWeight = FontWeight.Bold,
+                             fontSize = 24.sp
+                         )
+                     )
+                 }
+        },
+        modifier = Modifier.fillMaxSize()
+    ) {it ->
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(it),
+        ){
+            ProfileDetail()
+            Spacer(modifier = Modifier.height(30.dp))
+            ContentDetail()
+        }
     }
 }
 
@@ -36,6 +75,7 @@ fun ProfileDetail(
 
 ){
     Column(
+        modifier = Modifier.padding(4.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
@@ -46,30 +86,104 @@ fun ProfileDetail(
                 .clip(CircleShape)
                 .border(2.dp, Color.Black, CircleShape)
         )
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(text = "Luca Morrison", fontWeight = FontWeight.Bold)
-        Text(text = "@lucamorrison", color = Color.Gray)
-
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Luca Morrison",
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp
+            )
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "@lucamorrison",
+            color = Color.Gray,
+            style = TextStyle(
+                fontWeight = FontWeight.Normal,
+                fontSize = 18.sp
+            )
+        )
+        Spacer(modifier = Modifier.height(16.dp))
         Row {
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "Follow")
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier.size(120.dp, 40.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFFFFFF),
+                ),
+                border = BorderStroke(
+                    1.dp,
+                    Color(0xFF000000)
+                )
+            ) {
+                Text(
+                    text = "Follow",
+                    color = Color(0xFF000000),
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
             }
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "Message")
+            Spacer(modifier = Modifier.width(16.dp))
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier.size(120.dp, 40.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFFFFFF),
+                ),
+                border = BorderStroke(
+                    1.dp,
+                    Color(0xFF000000)
+                )
+            ) {
+                Text(
+                    text = "Message",
+                    color = Color(0xFF000000),
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
             }
         }
     }
 }
 
 @Composable
-fun PostItem(
+fun ContentDetail(
 
 ){
-
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Text(
+            text = "Content Info",
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(start = 16.dp),
+            style = TextStyle(
+                fontWeight = FontWeight.Normal,
+                fontSize = 18.sp
+            )
+        )
+        AudioWaveform(isPlaying = false, duration = "4:12")
+        InteractionRow(Post_Interactions(/*Todo interaction data*/))
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ProfileDetailPreview() {
     ProfileDetail()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ContentDetailPreview() {
+    ContentDetail()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PostDetailPreview() {
+    PostDetail()
 }
