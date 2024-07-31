@@ -53,4 +53,5 @@ object Graph {
     const val ROOT = "root_graph"
     const val AUTHENTICATION = "auth_graph"
     const val NAV_SCREEN = "nav_graph"
+    const val POST = "post_graph"
 }

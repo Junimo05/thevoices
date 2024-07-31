@@ -1,7 +1,10 @@
 package com.example.thevoices.presentations.components.PostComponent
 
 import android.annotation.SuppressLint
+import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,12 +18,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,20 +44,43 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.thevoices.R
+import com.example.thevoices.presentations.components.CommentItem
 import com.example.thevoices.presentations.components.InteractionRow
 import com.example.thevoices.utils.Post_Interactions
 
+@OptIn(ExperimentalFoundationApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PostDetail() {
+    var scrollThroughContentDetail = remember { mutableStateOf(false) }
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(listState) {
+        snapshotFlow { listState.firstVisibleItemIndex }.collect { index ->
+            when {
+                index >= 2 -> {
+                    // scroll to content detail
+                    scrollThroughContentDetail.value = true
+                }
+                index < 2 -> {
+                    // scroll to profile detail
+                    scrollThroughContentDetail.value = false
+                }
+                else -> {
+
+                }
+            }
+        }
+    }
+
     Scaffold(
         topBar = {
                  Row(
                     verticalAlignment = Alignment.CenterVertically,
                      horizontalArrangement = Arrangement.Center,
                      modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color.Gray)
+                         .fillMaxWidth()
+                         .background(Color.Gray)
                          .padding(bottom = 16.dp, top = 16.dp)
                  ) {
                      Text(
@@ -59,13 +94,28 @@ fun PostDetail() {
         },
         modifier = Modifier.fillMaxSize()
     ) {it ->
-        Column(
+        LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
+            state = listState,
             modifier = Modifier.padding(it),
         ){
-            ProfileDetail()
-            Spacer(modifier = Modifier.height(30.dp))
-            ContentDetail()
+            item {
+                ProfileDetail()
+            }
+            item {
+                Spacer(modifier = Modifier.height(30.dp))
+            }
+            stickyHeader {
+                ContentDetail(
+                    scrollThroughContentDetail = scrollThroughContentDetail
+                )
+            }
+            item {
+                Spacer(modifier = Modifier.height(30.dp))
+            }
+            items(10) {
+                CommentItem()
+            }
         }
     }
 }
@@ -150,37 +200,53 @@ fun ProfileDetail(
 
 @Composable
 fun ContentDetail(
-
+    scrollThroughContentDetail: MutableState<Boolean>
 ){
+    val transitionVisible = remember {
+        mutableStateOf(true)
+    }
+
+    LaunchedEffect(scrollThroughContentDetail.value) {
+        transitionVisible.value = !scrollThroughContentDetail.value
+        Log.e("scrollChange", "Scroll" + scrollThroughContentDetail.value)
+    }
+
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color(0xFFFFFFFF))
+            .padding(4.dp),
     ) {
-        Text(
-            text = "Content Info",
-            modifier = Modifier
-                .align(Alignment.Start)
-                .padding(start = 16.dp),
-            style = TextStyle(
-                fontWeight = FontWeight.Normal,
-                fontSize = 18.sp
+        AnimatedVisibility(
+            visible = transitionVisible.value,
+        ) {
+            Text(
+                text = "Content Info",
+                modifier = Modifier
+                    .align(Alignment.Start)
+                    .padding(start = 16.dp),
+                style = TextStyle(
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 18.sp
+                )
             )
-        )
+        }
         AudioWaveform(isPlaying = false, duration = "4:12")
         InteractionRow(Post_Interactions(/*Todo interaction data*/))
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ProfileDetailPreview() {
-    ProfileDetail()
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ContentDetailPreview() {
-    ContentDetail()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ProfileDetailPreview() {
+//    ProfileDetail()
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun ContentDetailPreview() {
+//    ContentDetail()
+//}
 
 @Preview(showBackground = true)
 @Composable

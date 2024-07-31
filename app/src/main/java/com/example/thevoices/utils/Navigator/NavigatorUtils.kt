@@ -15,3 +15,9 @@ sealed class MainScreen(
     object HomeScreen: MainScreen("HOME_SCREEN")
     object RecordScreen: MainScreen("RECORD_SCREEN")
 }
+
+sealed class PostDetailScreen(
+    val route: String
+) {
+    object PostDetail: PostDetailScreen("POST_DETAIL")
+}

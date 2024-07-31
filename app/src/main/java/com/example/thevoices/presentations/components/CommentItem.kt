@@ -80,7 +80,7 @@ fun CommentItem(
             )
 
             // Comment interaction
-            InteractionRow(Comment_Interactions(/*Todo interaction data*/))
+            InteractionRow(interactions = Comment_Interactions())
         }
     }
 }

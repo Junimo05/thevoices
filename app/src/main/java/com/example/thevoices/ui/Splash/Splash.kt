@@ -31,6 +31,10 @@ fun Splash(
                 Text(text = "Go to Home")
 //                Log.e(TAG, navController.currentDestination.toString())
             }
+            Button(onClick = { navController.navigate(MainScreen.HomeScreen.route)}) {
+                Text(text = "Go to PostDetail")
+//                Log.e(TAG, navController.currentDestination.toString())
+            }
         }
     }
 }

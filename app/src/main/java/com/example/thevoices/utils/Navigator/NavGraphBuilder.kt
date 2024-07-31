@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.example.thevoices.presentations.components.PostComponent.PostDetail
 import com.example.thevoices.ui.HomeScreen
 import com.example.thevoices.ui.Splash.SplashScreen
 
@@ -28,6 +29,15 @@ fun NavGraphBuilder.mainGraph(navController: NavController){
     navigation(route = Graph.NAV_SCREEN, startDestination = MainScreen.HomeScreen.route){
         composable(route = MainScreen.HomeScreen.route){
             HomeScreen(navController = navController)
+        }
+    }
+}
+
+fun NavGraphBuilder.postDetailGraph(navController: NavController){
+    navigation(route = Graph.POST, startDestination = PostDetailScreen.PostDetail.route){
+        composable(route = PostDetailScreen.PostDetail.route){
+            PostDetail()
+            //Todo: Add more
         }
     }
 }
