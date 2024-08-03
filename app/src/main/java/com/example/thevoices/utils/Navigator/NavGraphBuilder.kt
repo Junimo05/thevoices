@@ -32,12 +32,3 @@ fun NavGraphBuilder.mainGraph(navController: NavController){
         }
     }
 }
-
-fun NavGraphBuilder.postDetailGraph(navController: NavController){
-    navigation(route = Graph.POST, startDestination = PostDetailScreen.PostDetail.route){
-        composable(route = PostDetailScreen.PostDetail.route){
-            PostDetail()
-            //Todo: Add more
-        }
-    }
-}
