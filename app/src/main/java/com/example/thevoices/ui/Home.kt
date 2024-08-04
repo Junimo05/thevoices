@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.thevoices.R
 import com.example.thevoices.presentations.components.BottomBar
+import com.example.thevoices.presentations.components.PostComponent.NewFeedPostItem
 
 @Composable
 fun HomeScreen(
@@ -67,6 +68,8 @@ fun Home(
     val isScrolled = remember {
         mutableStateOf(mainStateList.firstVisibleItemIndex > 0)
     }
+
+    //
     val isPlayingAudio by rememberSaveable {
         mutableStateOf(false)
     }
@@ -79,13 +82,15 @@ fun Home(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .size(56.dp),
+                        .size(56.dp)
+                    ,
                     verticalAlignment = Alignment.CenterVertically
                 ){
                     Text(
                         text = "Home",
                         modifier = Modifier
                             .padding(16.dp)
+                            .weight(1f)
                         ,
                         style = TextStyle(
                             fontSize = with(LocalDensity.current) { dimensionResource(id = R.dimen.Title).toSp()},
@@ -96,8 +101,8 @@ fun Home(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp)
-                            .weight(1f, fill = true),
-                        horizontalArrangement = Arrangement.End,
+                            .weight(0.4f, fill = true),
+                        horizontalArrangement = Arrangement.SpaceAround,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
@@ -131,7 +136,9 @@ fun Home(
             userScrollEnabled = true,
             state = mainStateList
         ) {
-
+            items(10){
+                NewFeedPostItem()
+            }
         }
     }
 }

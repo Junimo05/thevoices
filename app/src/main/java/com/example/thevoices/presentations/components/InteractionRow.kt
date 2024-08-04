@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -35,13 +36,16 @@ fun InteractionRow(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier.padding(4.dp),
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         interactions.forEachIndexed { index, interaction ->
             Row (
-                modifier = Modifier.clickable { interaction.action() },
+                modifier = Modifier.clickable { interaction.action() }
+                    .padding(2.dp),
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Icon(

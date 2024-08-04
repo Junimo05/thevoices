@@ -20,10 +20,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.media3.exoplayer.ExoPlayer
 import com.example.thevoices.R
 
 @Composable
 fun AudioWaveform(
+    //exoPlayer: ExoPlayer,
     isPlaying: Boolean,
     duration: String
 ) {
