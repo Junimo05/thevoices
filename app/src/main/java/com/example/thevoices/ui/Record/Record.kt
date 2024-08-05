@@ -1,4 +1,4 @@
-package com.example.thevoices.ui
+package com.example.thevoices.ui.Record
 
 import android.content.Context
 import androidx.compose.runtime.Composable

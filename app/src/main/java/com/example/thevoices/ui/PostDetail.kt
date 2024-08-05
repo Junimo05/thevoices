@@ -1,4 +1,4 @@
-package com.example.thevoices.presentations.components.PostComponent
+package com.example.thevoices.ui
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -8,7 +8,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,30 +27,35 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.thevoices.R
 import com.example.thevoices.presentations.components.CommentItem
 import com.example.thevoices.presentations.components.InteractionRow
+import com.example.thevoices.presentations.components.PostComponent.AudioWaveform
+import com.example.thevoices.presentations.components.TopBarBackButton
 import com.example.thevoices.utils.Post_Interactions
 
 @OptIn(ExperimentalFoundationApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun PostDetail() {
+fun PostDetail(
+    navController: NavController,
+) {
     var scrollThroughContentDetail = remember { mutableStateOf(false) }
     val listState = rememberLazyListState()
 
@@ -75,22 +79,10 @@ fun PostDetail() {
 
     Scaffold(
         topBar = {
-                 Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                     horizontalArrangement = Arrangement.Center,
-                     modifier = Modifier
-                         .fillMaxWidth()
-                         .background(Color.Gray)
-                         .padding(bottom = 16.dp, top = 16.dp)
-                 ) {
-                     Text(
-                         text = "Post Detail",
-                         style = TextStyle(
-                             fontWeight = FontWeight.Bold,
-                             fontSize = 24.sp
-                         )
-                     )
-                 }
+            TopBarBackButton(
+                navController = navController,
+                title = stringResource(id = R.string.title_PostDetail)
+            )
         },
         modifier = Modifier.fillMaxSize()
     ) {it ->
@@ -251,5 +243,6 @@ fun ContentDetail(
 @Preview(showBackground = true)
 @Composable
 fun PostDetailPreview() {
-    PostDetail()
+    val navController = rememberNavController()
+    PostDetail(navController)
 }

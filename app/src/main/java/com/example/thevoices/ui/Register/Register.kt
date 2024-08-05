@@ -1,4 +1,4 @@
-package com.example.thevoices.ui
+package com.example.thevoices.ui.Register
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,7 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.thevoices.R
 import com.example.thevoices.ViewModel.RegisterViewModel
@@ -37,7 +37,7 @@ import com.example.thevoices.ViewModel.RegisterViewModel
 
 @Composable
 fun RegisterScreen(navController: NavController) {
-    val viewModel = viewModel<RegisterViewModel>()
+    val viewModel: RegisterViewModel = hiltViewModel()
     Register(
         viewModel = viewModel,
         navController = navController

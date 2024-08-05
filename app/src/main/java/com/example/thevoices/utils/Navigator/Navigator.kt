@@ -39,7 +39,8 @@ fun Navigator() {
             }
         }
     ) {
-        NavHost(navController = navController,
+        NavHost(
+            navController = navController,
             startDestination = Graph.AUTHENTICATION,
             route = Graph.ROOT
         ){
