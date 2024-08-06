@@ -223,7 +223,7 @@ fun ContentDetail(
                 )
             )
         }
-        AudioWaveform(isPlaying = false, duration = "4:12")
+        AudioWaveform(isPlaying = false, duration = "4:12", percentPlayed = 0.5f)
         InteractionRow(Post_Interactions(/*Todo interaction data*/))
     }
 }

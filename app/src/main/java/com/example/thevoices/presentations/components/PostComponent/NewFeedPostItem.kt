@@ -47,7 +47,7 @@ fun NewFeedPostItem(
             )
         }
         Spacer(modifier = Modifier.width(16.dp))
-        AudioWaveform(duration = "4:12", isPlaying = true)
+        AudioWaveform(duration = "4:12", isPlaying = true, percentPlayed = 0.5f)
         Spacer(modifier = Modifier.height(8.dp))
         InteractionRow(interactions = Post_Interactions(/*Todo interaction data*/))
     }
