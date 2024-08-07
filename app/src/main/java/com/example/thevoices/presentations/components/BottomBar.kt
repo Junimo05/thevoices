@@ -1,17 +1,22 @@
 package com.example.thevoices.presentations.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -24,6 +29,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
 import com.example.thevoices.R
+import com.example.thevoices.presentations.theme.MyTheme
 import com.example.thevoices.utils.Navigator.AuthScreen
 import com.example.thevoices.utils.Navigator.MainScreen
 
@@ -66,7 +72,12 @@ fun BottomBar(
     )
 
 
-    NavigationBar {
+    NavigationBar(
+        modifier = Modifier
+            .height(56.dp)
+        ,
+        containerColor = MaterialTheme.colorScheme.surface,
+    ) {
         items.forEachIndexed() { index, item ->
             val isSelected = selectedPage.intValue == index
             NavigationBarItem(
@@ -80,12 +91,16 @@ fun BottomBar(
                 icon = {
                     Icon(
                         painter = painterResource(
-                            if (selectedPage.intValue == index) item.selectedIcon else item.unselectedIcon
+                            if (selectedPage.intValue == index)
+                                item.selectedIcon else item.unselectedIcon
                         ),
                         contentDescription = item.contentDescription,
                         modifier = Modifier.width(24.dp)
                     )
-                }
+                },
+                modifier = Modifier
+                    .fillMaxSize()
+                ,
             )
         }
     }
@@ -101,5 +116,7 @@ data class BottomBarItem(
 @Preview(showBackground = true)
 @Composable
 fun BottomBarPreview() {
-//    BottomBar(navController = rememberNavController(), selectedPage = MutableIntState(0)) }
+    MyTheme {
+        BottomBar(navController = rememberNavController(), selectedPage = rememberSaveable { mutableIntStateOf(0) })
+    }
 }

@@ -1,16 +1,14 @@
 package com.example.thevoices.ui.Profile
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,14 +16,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,9 +39,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.thevoices.R
 import com.example.thevoices.presentations.components.InteractionRow
 import com.example.thevoices.presentations.components.PostComponent.AudioWaveform
-import com.example.thevoices.presentations.components.PostComponent.NewFeedPostItem
-import com.example.thevoices.presentations.components.PostComponent.ProfileInfo
 import com.example.thevoices.presentations.components.TopBarBackButton
+import com.example.thevoices.presentations.theme.MyTheme
 import com.example.thevoices.utils.Post_Interactions
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -63,7 +57,7 @@ fun ProfileScreen(
             modifier = Modifier
                 .padding(it)
                 .fillMaxSize()
-                .padding(16.dp),
+                .background(MaterialTheme.colorScheme.surfaceDim),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -74,7 +68,9 @@ fun ProfileScreen(
                 modifier = Modifier
                     .size(100.dp)
                     .clip(CircleShape)
+                    .background(Color.White)
                     .border(2.dp, Color.Black, CircleShape)
+                    .padding(6.dp)
             )
             Text(text = "@rene.ui", fontSize = 14.sp)
             Text(text = "Jonathan Crowe", fontSize = 24.sp, fontWeight = FontWeight.Bold)
@@ -107,11 +103,33 @@ fun ProfileScreen(
 
             // Action buttons
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                Button(onClick = { /*TODO*/ }, ) {
-                    Text(text = "Follow", color = Color.White)
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.secondary
+                    ),
+                    modifier = Modifier
+                        .height(40.dp)
+                        .width(120.dp)
+                ) {
+                    Text(
+                        text = "Follow",
+                        color = Color.White
+                    )
                 }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Message", color = Color.White)
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.secondary
+                    ),
+                    modifier = Modifier
+                        .height(40.dp)
+                        .width(120.dp)
+                ) {
+                    Text(
+                        text = "Message",
+                        color = Color.White
+                    )
                 }
             }
 
@@ -136,8 +154,9 @@ fun Post_Profile_Item(
     Column (
         modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 3.dp)
             .border(1.dp, Color.Gray)
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .padding(top = 18.dp, bottom = 4.dp, start = 10.dp, end = 2.dp)
     )
     {
@@ -149,7 +168,8 @@ fun Post_Profile_Item(
                     text = "My story of moving to Japan",
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     ),
                     modifier = Modifier.padding(start = 4.dp)
                 )
@@ -166,7 +186,8 @@ fun Post_Profile_Item(
                             "diauwhdwaiudhwaudwaiudhwaiudhwaiudhwa",
                     style = TextStyle(
                         fontWeight = FontWeight.Normal,
-                        fontSize = 13.sp
+                        fontSize = 13.sp,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     ),
                     modifier = Modifier.padding(4.dp)
                 )
@@ -186,15 +207,27 @@ fun Post_Profile_Item(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    name = "LightMode",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO
+)
 @Composable
 fun ProfileItemPreview() {
-    Post_Profile_Item()
+    MyTheme {
+        Post_Profile_Item()
+    }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    name = "LightMode",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO
+)
 @Composable
 fun ProfileScreenPreview() {
     val navController = rememberNavController()
-    ProfileScreen(navController)
+    MyTheme {
+        ProfileScreen(navController)
+    }
 }

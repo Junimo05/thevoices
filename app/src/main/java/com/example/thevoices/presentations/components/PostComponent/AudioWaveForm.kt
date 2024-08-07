@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Space
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -42,8 +43,12 @@ fun AudioWaveform(
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(8.dp)
             .height(65.dp)
-            .padding(8.dp),
+            .background(MaterialTheme.colorScheme.inversePrimary)
+            .border(1.dp, MaterialTheme.colorScheme.onBackground, MaterialTheme.shapes.small)
+            .padding(8.dp)
+        ,
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Placeholder for waveform graphic
@@ -51,9 +56,9 @@ fun AudioWaveform(
         val barCount = 100
         val barHeights = List(barCount) { random.nextFloat() }
 
-        val playedColor = Color.Green
+        val playedColor = MaterialTheme.colorScheme.onBackground
 //        val notPlayedColor = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium)
-        val notPlayedColor = Color.Gray
+        val notPlayedColor = MaterialTheme.colorScheme.background
 
         // Todo: Button to play/pause audio
         Icon(

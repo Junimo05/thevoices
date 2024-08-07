@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,6 +33,7 @@ data class Interaction(
 
 @Composable
 fun InteractionRow(
+    //isStared: Boolean,
     interactions: List<Interaction>,
     modifier: Modifier = Modifier
 ) {
@@ -50,7 +52,7 @@ fun InteractionRow(
             ){
                 Icon(
                     painter = painterResource(id = interaction.icon),
-                    contentDescription = "Favorite",
+                    contentDescription = null,
                     modifier = Modifier.size(24.dp),
                 )
                 Spacer(modifier = Modifier.width(3.dp))
@@ -58,7 +60,8 @@ fun InteractionRow(
                     text = interaction.count.toString(),
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 )
             }
